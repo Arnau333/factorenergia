@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('questions', function (Blueprint $table) {
+        Schema::create('Question', function (Blueprint $table) {
             $table->increments('id');
             $table->string('Tagged'); // Campo de tipo string (Tagged)
             $table->date('Todate')->nullable(); // Campo de tipo fecha (Todate) que puede ser nulo
@@ -25,6 +25,7 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('questions');
+        Schema::dropIfExists('Question');
     }
 };
+
