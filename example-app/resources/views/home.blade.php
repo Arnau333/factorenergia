@@ -13,10 +13,10 @@
                             {{ session('status') }}
                         </div>
                     @endif
-                    <form action="api/question">
+                    <form action="" id="fromquestion">
                     <div class="mb-3">
                         <label for="exampleFormControlInput1" class="form-label">Tagged</label>
-                        <input type="text" class="form-control" name="Tagged" id="exampleFormControlInput1" placeholder="example...">
+                        <input type="text" class="form-control" required name="Tagged" id="exampleFormControlInput1" placeholder="example...">
                       </div>
                       <div class="mb-3">
                         <label for="exampleFormControlInput2" class="form-label">Todate</label>
@@ -30,9 +30,107 @@
                       <button type="submit" class="btn btn-primary">Submit</button>
 
                     </form>
+
+
                 </div>
+
             </div>
+                <div id="respuesta"></div>
+
         </div>
+
+
     </div>
+
 </div>
+
+<script>
+var lista = "";
+
+$(document).ready(function () {
+    // alert("hellow");
+    $.ajax({
+        type: "GET",
+        url: "api/questionlist",
+        dataType: "json",
+        success: function (response) {
+
+            // $('#respuesta').text();
+
+            response.forEach(element => {
+
+                console.log("ID: " + element['id'] + ", Tagged: " + element['Tagged'] + " , " + element['Todate'] + " , Fromdate: " + element['Fromdate'])
+                    lista += "</br>" + "ID: " + element['id'] + ", Tagged: " + element['Tagged'] + " , " + element['Todate'] + " , Fromdate: " + element['Fromdate'];
+                    lista += '&nbsp;&nbsp;<a target="_blank" href="'
+                    lista += 'api/question?Tagged='
+                    lista += element['Tagged']
+                    lista += '&Todate='
+                    lista += element['Todate']!=null && element['Todate']!="null" ? element['Todate'] : ""
+                    lista += '&Fromdate='
+                    lista += element['Fromdate']!=null && element['Fromdate']!="null" ? element['Fromdate'] : ""
+                    lista +='" >url</a>'
+
+
+            });
+
+            $('#respuesta').html(lista);
+
+
+        }
+    });
+
+    $('#fromquestion').submit(function (e) {
+        e.preventDefault();
+
+        $.ajax({
+            type: "GET",
+            url: "api/question",
+            data: $('#fromquestion').serialize(),
+            dataType: "json",
+            success: function (response) {
+
+
+                console.log(response)
+
+
+            }
+        });
+
+         lista = ""
+        $.ajax({
+            type: "GET",
+            url: "api/questionlist",
+            dataType: "json",
+            success: function (response) {
+
+
+                response.forEach(element => {
+
+// http://localhost/api/question?Tagged=&Todate=&Fromdate=
+
+console.log("ID: " + element['id'] + ", Tagged: " + element['Tagged'] + " , " + element['Todate'] + " , Fromdate: " + element['Fromdate'])
+                    lista += "</br>" + "ID: " + element['id'] + ", Tagged: " + element['Tagged'] + " , " + element['Todate'] + " , Fromdate: " + element['Fromdate'];
+                    lista += '&nbsp;&nbsp;<a target="_blank" href="'
+                    lista += 'api/question?Tagged='
+                    lista += element['Tagged']
+                    lista += '&Todate='
+                    lista += element['Todate']!=null && element['Todate']!="null" ? element['Todate'] : ""
+                    lista += '&Fromdate='
+                    lista += element['Fromdate']!=null && element['Fromdate']!="null" ? element['Fromdate'] : ""
+                    lista +='" >url</a>'
+
+
+                });
+
+                $('#respuesta').html(lista);
+
+
+            }
+
+
+        });
+    });
+});
+
+</script>
 @endsection

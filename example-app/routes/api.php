@@ -22,4 +22,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::get('/question', [QuestionApiController::class, 'makeRequest']);
 
+Route::get('/questionlist', [QuestionApiController::class, 'listequest']);
+
 
