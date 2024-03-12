@@ -14,42 +14,35 @@ class Question extends Model
     protected $fillable = [
         'Tagged',   //string
         'Todate',   //date
-        'Fromdate'  //date
+        'Fromdate', //date
+        'response'  //json
     ];
 
-    // Accessor for 'Tagged'
-    public function getTaggedAttribute($value)
-    {
-        return ucfirst($value);
+    public static function  QuestionIsExist($request)  {
+
+        $Questionobj = Question::where('Tagged', $request->Tagged)
+                        ->where('Todate', $request->Todate)
+                        ->where('Fromdate', $request->Fromdate)
+                        ->first();
+
+    return isset($Questionobj->response) ?? false;
+
+
     }
 
-    // Accessor for 'Todate'
-    public function getTodateAttribute($value)
-    {
-        return $value;
+    public static function  createQuestion($request, $response)  {
+        $newQuestion = new Question;
+
+        $newQuestion->Tagged = $request->Tagged ?? "";
+        $newQuestion->Todate = $request->Todate;
+        $newQuestion->Fromdate = $request->Fromdate;
+        $newQuestion->response = $response;
+
+        $newQuestion->save();
     }
 
-    // Accessor for 'Fromdate'
-    public function getFromdateAttribute($value)
-    {
-        return $value;
-    }
 
-    // Mutator for 'Tagged'
-    public function setTaggedAttribute($value)
-    {
-        return $value;
-    }
 
-    // Mutator for 'Todate'
-    public function setTodateAttribute($value)
-    {
-        $this->attributes['Todate'] = $value;
-    }
 
-    // Mutator for 'Fromdate'
-    public function setFromdateAttribute($value)
-    {
-        $this->attributes['Fromdate'] = $value;
-    }
+
 }

@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('Tagged'); // Campo de tipo string (Tagged)
             $table->date('Todate')->nullable(); // Campo de tipo fecha (Todate) que puede ser nulo
             $table->date('Fromdate')->nullable(); // Campo de tipo fecha (Fromdate) que puede ser nulo
+            $table->json('response'); // Campo de tipo fecha (Fromdate) que puede ser nulo
             $table->timestamps(); // Registros de fecha y hora de creación/modificación
         });
     }

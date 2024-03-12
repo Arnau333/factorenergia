@@ -5,11 +5,23 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use Carbon\Carbon;
+use App\Models\Question;
 
 class QuestionApiController extends Controller
 {
     function makeRequest(Request $request)
     {
+
+
+        //existe?
+         Question::QuestionIsExist($request);
+
+
+
+
+
+
+
         $Tagged = $request->query('Tagged');
         $Todate = $request->query('Todate');
         $Fromdate = $request->query('Fromdate');
@@ -24,11 +36,16 @@ class QuestionApiController extends Controller
         $response = Http::get('https://api.stackexchange.com/2.3/questions?page=1&fromdate=' . $Fromdate . '&todate=' . $Todate . '&order=desc&sort=activity&tagged=' . $Tagged . '&site=stackoverflow');
 
         if ($response->ok()) {
-            $response = $response->json();
+            // $response = $response->json();
+
+            Question::createQuestion($request, $response);
+
             return $response;
         } else {
             dd('ERROR');
         }
+
+                //crear
 
 
     }
