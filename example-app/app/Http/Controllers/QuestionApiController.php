@@ -19,23 +19,22 @@ class QuestionApiController extends Controller
             return json_decode($response);
         } else {
             $Tagged = $request->query('Tagged');
-            $Todate = $request->query('Todate') != "null" ? $request->query('Todate') : null;
-            $Fromdate = $request->query('Fromdate') != "null" ? $request->query('Fromdate') : null;
+            $Todate = $request->query('Todate');
+            $Fromdate = $request->query('Fromdate');
 
-            if (!isNull($Todate)) {
+            if ($Todate!=null) {
                 $Todate =  Carbon::createFromFormat('Y-m-d H:i:s', $Todate . "01:00:00", "Europe/Madrid");
                 $Todate =   $Todate->timestamp;
             } else {
                 $Todate = "";
             }
 
-            if (!isNull($Fromdate)) {
+            if ($Fromdate!=null) {
                 $Fromdate = Carbon::createFromFormat('Y-m-d H:i:s', $Fromdate . "01:00:00", "Europe/Madrid");
                 $Fromdate = $Fromdate->timestamp;
             } else {
                 $Fromdate = "";
             }
-
 
             $response = Http::get('https://api.stackexchange.com/2.3/questions?page=1&fromdate=' . $Fromdate . '&todate=' . $Todate . '&order=desc&sort=activity&tagged=' . $Tagged . '&site=stackoverflow');
 
