@@ -48,14 +48,12 @@
 var lista = "";
 
 $(document).ready(function () {
-    // alert("hellow");
-    $.ajax({
+        $.ajax({
         type: "GET",
         url: "api/questionlist",
         dataType: "json",
         success: function (response) {
 
-            // $('#respuesta').text();
 
             response.forEach(element => {
 
@@ -106,9 +104,8 @@ $(document).ready(function () {
 
                 response.forEach(element => {
 
-// http://localhost/api/question?Tagged=&Todate=&Fromdate=
 
-console.log("ID: " + element['id'] + ", Tagged: " + element['Tagged'] + " , " + element['Todate'] + " , Fromdate: " + element['Fromdate'])
+                    console.log("ID: " + element['id'] + ", Tagged: " + element['Tagged'] + " , " + element['Todate'] + " , Fromdate: " + element['Fromdate'])
                     lista += "</br>" + "ID: " + element['id'] + ", Tagged: " + element['Tagged'] + " , " + element['Todate'] + " , Fromdate: " + element['Fromdate'];
                     lista += '&nbsp;&nbsp;<a target="_blank" href="'
                     lista += 'api/question?Tagged='
