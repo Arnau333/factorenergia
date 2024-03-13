@@ -31,8 +31,13 @@ y hacemos un:
 
 archivos interesantes:
 example-app/resources/views/home.blade.php
+
 example-app/routes/api.php
+
 example-app/app/Http/Controllers/QuestionApiController.php
+
 example-app/routes/web.php
+
 example-app/app/Models/Question.php
+
 example-app/database/migrations/2024_03_08_180605_create_questions_table.php    
