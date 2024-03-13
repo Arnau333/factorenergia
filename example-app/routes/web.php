@@ -12,11 +12,7 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-// Auth::routes();
 
-Route::get('/', function () {
-    return view('welcome');
-});
 
 
 Route::get('/login', function () {
@@ -24,7 +20,7 @@ Route::get('/login', function () {
 })->name('login');
 
 
- Route::get('/home', function () {
+ Route::get('/', function () {
      return view('home');
  });
 
