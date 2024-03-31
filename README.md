@@ -8,7 +8,7 @@ cd example-app/
 
 y para arrancar los contenedores docker hacemos un
 
-./vendor/bin/sail up
+../vendor/bin/sail up
 
 una vez aquí para que funcione bootstrap
 
